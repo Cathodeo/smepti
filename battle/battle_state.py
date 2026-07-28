@@ -10,7 +10,10 @@ class BattleState:
             Chara("Ola", 100, 0, [0,0,0,0], 0, 1.2),
             Chara("Markus", 100, 0, [0,0,0,0], 0, 0.7)
         ]
-        self.enemies = []
+        # Enemigos. Para la demo solo hay uno
+        self.enemies = [
+            Chara("Alicoptor", 800, 0, [0,0,0,0], 0, 0.5)
+        ]
       
 
         # Turnos
