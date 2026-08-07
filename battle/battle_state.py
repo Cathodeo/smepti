@@ -6,9 +6,9 @@ class BattleState:
     def __init__(self):
         # Participantes
         self.party = [
-            Chara("Yurinka", 100, 0, [0,0,0,0], 0, 1, "Neutral"),
-            Chara("Ola", 100, 0, [0,0,0,0], 0, 1.2, "Neutral"),
-            Chara("Markus", 100, 0, [0,0,0,0], 0, 0.7, "Neutral")
+            #Chara("Yurinka", 100, 0, [0,0,0,0], 0, 1, "Neutral"),
+            Chara("Ola", 300, 0, [0,0,0,0], 0, 1.2, "Neutral"),
+            #Chara("Markus", 100, 0, [0,0,0,0], 0, 0.7, "Neutral")
         ]
         # Enemigos. Para la demo solo hay uno
         self.enemies = [
@@ -23,3 +23,7 @@ class BattleState:
 
         # Sistema de cartas
         self.hand = []
+        self.choices = []
+        self.tiers = []
+
+

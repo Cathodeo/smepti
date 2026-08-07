@@ -1,12 +1,12 @@
 import random
-import battle_state
+from battle.battle_state import * 
 from .chara import Chara
 
 
 def gen_hand():
     battle_state.hand.clear()
     for i in range(5):
-        battle_state.hand.append(random.randint(1, 4))
+        battle_state.hand.append(random.randint(1, 3))
 
         
 def dec_status_countdown():

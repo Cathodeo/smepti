@@ -1,8 +1,13 @@
-from math import pi, sin, cos
-
 from direct.showbase.ShowBase import ShowBase
-from direct.task import Task
-from direct.actor.Actor import Actor
+from panda3d.core import DirectionalLight, AmbientLight
+
+import simplepbr
+
+from actors import Ola, Alicoptor
+
+from battle import BattleState
+from battle.attacks import *
+
 
 from panda3d.core import DirectionalLight, AmbientLight
 import simplepbr
@@ -14,12 +19,13 @@ class MyApp(ShowBase):
 
     def __init__(self):
 
-        battle = BattleState()
+        self.battle = BattleState()
         super().__init__()
 
         # Inicializa el pipeline PBR
         simplepbr.init()
-
+        base.disableMouse()
+        
         # ==========================
         # Luces
         # ==========================
@@ -43,27 +49,14 @@ class MyApp(ShowBase):
         # Modelo
         # ==========================
 
-        self.yurinka = Actor("assets/models/yurinka.glb")
-        self.yurinka.reparentTo(self.render)
-        self.yurinka.loop("walk")
-        self.yurinka.setScale(0.75)
-        self.camera.lookAt(self.yurinka)
-        self.camLens.setFov(400)
-
-        # ==========================
-        # Cámara
-        # ==========================
-        # Add the spinCameraTask procedure to the task manager.
-        self.taskMgr.add(self.spinCameraTask, "SpinCameraTask")
-
-    # Define a procedure to move the camera.
-    def spinCameraTask(self, task):
-        angleDegrees = task.time * 60.0
-        angleRadians = angleDegrees * (pi / 180.0)
-        self.camera.setPos(20 * sin(angleRadians), -20 * cos(angleRadians), 3)
-        self.camera.setHpr(angleDegrees, 0, 0)
-        return Task.cont
-
+        self.ola = Ola(self)
+        self.alicoptor = Alicoptor(self)
+        self.ola.actor.setPos(-5, -5, 0)
+        self.ola.actor.setH(30)
+        self.alicoptor.actor.setPos(2, 5, 0)
+        self.alicoptor.actor.setH(210)
+        self.cam.setPos(0, -15, 4)
+        self.cam.lookAt(0, 2, 1)
 
 
 

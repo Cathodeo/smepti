@@ -1,7 +1,6 @@
 import random
 
-import battle_controller
-import battle_state
+from battle.battle_controller import *
 
 
 # The standard accuracy check for every attack.
@@ -16,6 +15,9 @@ class Attack:
         self.execute = execute
         self.target_type = target_type
 
+
+def miss():
+    print("The attack missed!")
 
 # Pocket Crocket is always AOE and against foes.
 def execute_pocket_crocket(tier):
@@ -126,6 +128,32 @@ def execute_biohazard(tier):
                     print(str(count_of_poison) + " enemies have been poisoned.")
 
 
+def execute_thermal_shield():
+    for chara in battle_state.enemies:
+        chara.element = "Shielded"        
+
+def execute_tail_swing():
+    print("Alicoptor swung his tail!")
+    for chara in battle_state.party:
+        battle_controller.apply_damage(chara, random.randint(20, 25))
+
+def execute_headbutt():
+    print("Alicoptor charges forward!")
+    #target = randint(1,3)
+    # the demo will always have a sole target
+    if acheck(60):
+        battle_controller.apply_damage(battle_state.party[0], random.randint(10, 15))
+        print("The attack connected!")
+        if acheck(50):
+            print("The attack also made its target flinch!")
+            battle_controller.apply_status(battle_state.party[0], 2, 1)
+    else:
+        miss()
+
+
+
+
+
 pocket_crocket = Attack(
     "Pocket Crocket",
     "Launches a miniature nuke. Can backfire on lower tiers",
@@ -146,3 +174,23 @@ biohazard_rain = Attack(
     execute_biohazard,
     "enemies_aoe",
 )
+
+thermal_shield = Attack(
+    "Thermal Shield",
+    "Brings up the enemy's thermal shield",
+    execute_thermal_shield,
+    "self"
+)
+tail_swing = Attack(
+    'Tail Swing',
+    "Powerful AOE attack",
+    execute_tail_swing,
+    "enemies_aoe"
+)
+headbutt = Attack(
+    "Headbutt",
+    "Alicoptor charges forward and hits a foe. May cause knockback",
+    execute_headbutt,
+    "enemy"
+)
+
