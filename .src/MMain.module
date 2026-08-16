@@ -31,6 +31,7 @@ Public Sub Window_Draw()
   Draw.Clear
   Draw.Font.Size = H
   BattleUI.Textbox(MainDB.GetCharname(FoeID))
+  BattleUI.FoePortraitSingle(FoeID)
   
 End
 

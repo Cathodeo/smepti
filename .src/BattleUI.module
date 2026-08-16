@@ -3,8 +3,22 @@
 Public Sub Textbox(Text As String)
 
 
-Draw.Rect(8, 160, 240, 64, 128)
+Draw.Rect(8, 160, 240, 64)
 Draw.Text(Text, 20, 168)
 
-End ' Gambas module file
+End
+
+Public Sub FoePortraitSingle(FoeId As Integer)
+  
+  Dim Path As String
+  Dim img As Image
+  Path = "images/foes/" & MainDB.GetCharname(FoeId) & ".png"
+  img = Image.Load(Path)
+  Draw.Image(img, 60, 10)
+
+  
+  
+End
+
+ ' Gambas module file
 
