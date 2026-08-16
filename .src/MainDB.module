@@ -1,0 +1,27 @@
+' Gambas module file
+
+Private db As Connection
+
+Public Sub Initialize()
+
+  
+  db = New Connection
+  
+  db.Type = "sqlite3"
+  db.Host = "/home/tmmartin/smepti"
+  db.Name = "smepti.db"
+
+  db.Open()
+
+End
+
+Public Sub GetCharname(charid As Integer) As String
+
+  Dim result As Result
+
+  result = db.Exec("SELECT name FROM charas WHERE id = &1", charid)
+
+  Return result["name"]
+
+End
+' Gambas module file

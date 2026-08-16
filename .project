@@ -1,0 +1,11 @@
+# Gambas Project File 3.0
+Startup=MMain
+Version=0.0.1
+Component=gb.image
+Component=gb.db2
+Component=gb.db2.sqlite3
+Component=gb.sdl2
+Component=gb.opengl
+TabSize=2
+Language=en_US
+Packager=1

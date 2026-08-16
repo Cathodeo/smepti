@@ -1,0 +1,10 @@
+' Gambas module file
+
+Public Sub Textbox(Text As String)
+
+
+Draw.Rect(8, 160, 240, 64, 128)
+Draw.Text(Text, 20, 168)
+
+End ' Gambas module file
+

@@ -1,0 +1,46 @@
+' Gambas module file
+
+Private $hWindow As Window
+Private FoeID As Integer
+
+
+
+Public Sub Main()
+
+
+  
+  $hWindow = New Window As "Window"
+  FoeID = 2
+  With $hWindow
+    .Resize(256, 240)
+    .Resizable = False
+    .Show
+    .FrameRate = 60
+    $hWindow.FullScreen = Not $hWindow.FullScreen
+    MainDB.Initialize
+  End With 
+  
+End
+
+Public Sub Window_Draw()
+  
+  Dim H As Integer
+  
+  H = Font.DefaultHeight 
+  
+  Draw.Clear
+  Draw.Font.Size = H
+  BattleUI.Textbox(MainDB.GetCharname(FoeID))
+  
+End
+
+Public Sub Window_KeyPress()
+  
+  Select Case Key.Code
+    Case Key.F1
+      $hWindow.FullScreen = Not $hWindow.FullScreen
+    Case Key.Esc
+      $hWindow.Close
+  End Select
+  
+End

@@ -1,0 +1,10 @@
+[Connection]
+Type="sqlite"
+NoPassword=False
+RememberPassword=False
+IgnoreCharset=False
+DisplayMetadata=True
+RememberTemplate=False
+Database="smepti.db"
+Requests=[""]
+
