@@ -1,12 +1,31 @@
 ' Gambas module file
 
-Public Sub Textbox(Text As String)
-
-
-Draw.Rect(8, 160, 240, 64)
-Draw.Text(Text, 20, 168)
-
+Public Sub EncounterMsg(FoeId As Integer)
+  
+  Dim Msg As String
+  Msg = "You encountered " & MainDB.GetCharname(FoeId)
+  Textbox(Msg)
+  
 End
+
+
+Public Sub SelectUI()
+  
+  Draw.FillRect(8, 160, 240, 64, 0)
+  Draw.Rect(8, 160, 120, 64)
+Draw.Text("1 - ATTACK", 24, 168)
+Draw.Text("2 - E-SPELL", 24, 188)
+Draw.Text("3 - DEFEND", 24, 208)
+  
+End
+
+
+
+
+
+
+
+
 
 Public Sub FoePortraitSingle(FoeId As Integer)
   
@@ -20,5 +39,49 @@ Public Sub FoePortraitSingle(FoeId As Integer)
   
 End
 
+
+
+Public Sub Textbox(Text As String)
+
+Dim Words As String[]
+Dim Lines As String[]
+Dim CurrentLine As String
+Dim Word As String
+Dim I As Integer
+
+
+
+Draw.FillRect(8, 160, 240, 64, 0)
+Draw.Rect(8, 160, 240, 64)
+
+Words = Split(Text, " ")
+Lines = New String[]
+
+For Each Word In Words
+
+  If Len(CurrentLine) + Len(Word) + 1 > 30 Then
+    Lines.Add(CurrentLine)
+    CurrentLine = Word
+  Else
+    If CurrentLine = "" Then
+      CurrentLine = Word
+    Else
+      CurrentLine &= " " & Word
+    Endif
+  Endif
+
+Next
+
+If CurrentLine <> "" Then Lines.Add(CurrentLine)
+
+For I = 0 To Min(Lines.Count - 1, 2)
+  Draw.Text(Str(Lines[I]), 20, 168 + (I * 20))
+Next
+
+End
+
+
+
  ' Gambas module file
+
 

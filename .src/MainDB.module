@@ -1,5 +1,19 @@
 ' Gambas module file
 
+Public Struct Spell
+  Name As String
+  Power As Integer
+  Accuracy As Integer
+  Effect As Integer
+  Status As Integer
+  IsAlly As Boolean
+  IsGlobal As Boolean
+  
+End Struct' Gambas module file
+
+
+
+
 Private db As Connection
 
 Public Sub Initialize()
@@ -24,4 +38,24 @@ Public Sub GetCharname(charid As Integer) As String
   Return result["name"]
 
 End
+
+
+
+Public Sub GetSpell(spellid As Integer) As Spell
+  
+  Dim result As Result
+  Dim spell As Spell
+  result = db.Exec("SELECT * FROM spells where id = &1", spellid)
+  spell.Name = result["name"]
+  spell.Power = result["power"]
+  spell.Accuracy = result["accuracy"]
+  spell.Effect = result["effect"]
+  spell.IsAlly = CBool(result["isally"])
+  spell.IsGlobal = CBool(result["isglobal"])
+  
+  Return spell
+  
+End
+
+
 ' Gambas module file

@@ -2,6 +2,7 @@
 
 Private $hWindow As Window
 Private FoeID As Integer
+Private $SelectedUI As Boolean
 
 
 
@@ -23,25 +24,38 @@ Public Sub Main()
 End
 
 Public Sub Window_Draw()
-  
+
   Dim H As Integer
-  
-  H = Font.DefaultHeight 
-  
+
+  H = Font.DefaultHeight
+
   Draw.Clear
   Draw.Font.Size = H
-  BattleUI.Textbox(MainDB.GetCharname(FoeID))
+
+  BattleUI.EncounterMsg(FoeID)
   BattleUI.FoePortraitSingle(FoeID)
-  
+
+  If $SelectedUI Then
+    BattleUI.SelectUI()
+  Endif
+
 End
 
 Public Sub Window_KeyPress()
-  
+
   Select Case Key.Code
+
     Case Key.F1
-      $hWindow.FullScreen = Not $hWindow.FullScreen
+      $SelectedUI = True
+
+    Case Key.F2
+      $SelectedUI = False
+
     Case Key.Esc
       $hWindow.Close
+
   End Select
-  
+
+
+
 End

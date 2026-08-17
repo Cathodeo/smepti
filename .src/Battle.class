@@ -1,0 +1,16 @@
+' Gambas class file
+
+Private $FoeID As Integer
+
+
+Public Sub SetFoe(ID As Integer)
+
+  $FoeID = ID
+
+End
+
+Public Function GetFoe() As Integer
+  
+  Return $FoeID
+  
+End
