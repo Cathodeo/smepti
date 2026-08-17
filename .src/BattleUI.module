@@ -9,22 +9,34 @@ Public Sub EncounterMsg(FoeId As Integer)
 End
 
 
-Public Sub SelectUI()
+Public Sub ClearSect()
   
   Draw.FillRect(8, 160, 240, 64, 0)
-  Draw.Rect(8, 160, 120, 64)
+  
+End
+
+
+
+Public Sub SelectUI()
+  
+ClearSect()
+Draw.Rect(8, 160, 120, 64)
 Draw.Text("1 - ATTACK", 24, 168)
 Draw.Text("2 - E-SPELL", 24, 188)
 Draw.Text("3 - DEFEND", 24, 208)
   
 End
 
+Public Sub SpellSelect()
 
+  ClearSect()
 
+  Draw.Rect(12, 160, 55, 64)
+  Draw.Rect(71, 160, 55, 64)
+  Draw.Rect(130, 160, 55, 64)
+  Draw.Rect(189, 160, 55, 64)
 
-
-
-
+End
 
 
 Public Sub FoePortraitSingle(FoeId As Integer)
@@ -51,7 +63,7 @@ Dim I As Integer
 
 
 
-Draw.FillRect(8, 160, 240, 64, 0)
+ClearSect()
 Draw.Rect(8, 160, 240, 64)
 
 Words = Split(Text, " ")

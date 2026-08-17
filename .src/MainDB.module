@@ -11,7 +11,14 @@ Public Struct Spell
   
 End Struct' Gambas module file
 
-
+Public Struct Chara
+  Name As String
+  EsperType As String
+  Power As Integer
+  Defense As Integer
+  NullMagic As Integer
+  Speed As Integer
+End Struct
 
 
 Private db As Connection
@@ -57,5 +64,23 @@ Public Sub GetSpell(spellid As Integer) As Spell
   
 End
 
+
+Public Function GetChara(charaid As Integer) As Chara
+  
+  Dim result As Result
+  Dim chara As Chara
+  
+  result = db.Exec("SELECT * FROM charas WHERE id = &1", charaid)
+  
+  chara.Name = result["name"]
+  chara.EsperType = result["esper_type"]
+  chara.Power = result["power"]
+  chara.Defense = result["defense"]
+  chara.NullMagic = result["nullmagic"]
+  chara.Speed = result["speed"]
+  
+  Return chara
+  
+End
 
 ' Gambas module file

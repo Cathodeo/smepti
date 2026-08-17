@@ -36,7 +36,7 @@ Public Sub Window_Draw()
   BattleUI.FoePortraitSingle(FoeID)
 
   If $SelectedUI Then
-    BattleUI.SelectUI()
+    BattleUI.SpellSelect()
   Endif
 
 End
