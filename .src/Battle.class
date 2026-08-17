@@ -1,7 +1,16 @@
 ' Gambas class file
 
+Public Hand[4] As Integer
 
-  
+Public Struct BChara
+  HP As Integer
+  Buffs[4] As Integer
+  Status As Integer
+  CopiedSpells[2] As Integer
+  CopyFactor[2] As Integer
+End Struct
+
+
   
 
 
@@ -29,3 +38,66 @@ Public Function GetFoe() As Integer
   Return $FoeID
   
 End
+
+
+Public Function InitYuri() As BChara
+
+  Dim bchara As BChara
+
+  bchara.HP = 100
+  bchara.Status = 0
+  bchara.Buffs = [0, 0, 0, 0]
+  bchara.CopiedSpells = [0, 0]
+  bchara.CopyFactor = [0, 0]
+
+  Return bchara
+
+End
+
+Public Sub Shuffle(Bchara As BChara)
+
+  Dim i As Integer
+  Dim choice As Integer
+
+  For i = 0 To 3
+
+    If Bchara.CopiedSpells[0] = 0 Then
+
+      ' Solo Copycat
+      Hand[i] = 101
+
+    Else If Bchara.CopiedSpells[1] = 0 Then
+
+      ' Copycat + un spell
+      choice = Rand(1, 2)
+
+      If choice = 1 Then
+        Hand[i] = 101
+      Else
+        Hand[i] = Bchara.CopiedSpells[0]
+      Endif
+
+    Else
+
+      ' Copycat + dos spells
+      choice = Rand(1, 3)
+
+      If choice = 1 Then
+        Hand[i] = 101
+      Else If choice = 2 Then
+        Hand[i] = Bchara.CopiedSpells[0]
+      Else
+        Hand[i] = Bchara.CopiedSpells[1]
+      Endif
+
+    Endif
+
+  Next
+
+End
+
+  
+  
+  
+
+
