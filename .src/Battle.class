@@ -1,8 +1,16 @@
 ' Gambas class file
 
-Public Hand[4] As Integer
+Public Struct BattleState
+  UIMode As Integer
+  Turn As Integer
+  IsFinish As Boolean
+  SelfWin As Boolean
+  LastEnemySpell As Integer
+  
+End Struct
 
 Public Struct BChara
+  DBID As Integer
   HP As Integer
   Buffs[4] As Integer
   Status As Integer
@@ -11,19 +19,11 @@ Public Struct BChara
 End Struct
 
 
-  
 
-
-Public Struct BattleState
-  UIMode As Integer
-  Turn As Integer
-  IsFinish As Boolean
-  SelfWin As Boolean
-  
-  
-End Struct
-
-
+Public Hand[4] As Integer
+Public Bat As BattleState
+Public Self As BChara
+Public Foe As BChara
 Private $FoeID As Integer
 
 
@@ -40,10 +40,11 @@ Public Function GetFoe() As Integer
 End
 
 
-Public Function InitYuri() As BChara
+Public Function InitChara(ident As Integer) As BChara
 
   Dim bchara As BChara
 
+  BChara.DBID = ident
   bchara.HP = 100
   bchara.Status = 0
   bchara.Buffs = [0, 0, 0, 0]
@@ -96,7 +97,39 @@ Public Sub Shuffle(Bchara As BChara)
 
 End
 
+  Public Function Debug_InitBattle()
   
+
+  Self = InitChara(1)
+
+  Foe = InitChara(2)
+  Bat.Turn = 1
+  Bat.LastEnemySpell = 0
+  Bat.UIMode = 1
+  Bat.IsFinish = False
+  Bat.SelfWin = False
+End
+
+
+Public Function CalculateDmg(attacker As BChara, target As BChara, moveid As Integer) As Integer
+  
+
+  Dim Damage As Integer
+  Dim SpellPower As Integer
+  Dim DefenderDefense As Integer
+  Dim AttackerPower As Integer
+
+  
+  SpellPower = MainDB.GetSpell(moveid).Power
+  AttackerPower = MainDB.GetChara(attacker).Power
+  DefenderDefense = MainDB.GetChara(target).Defense
+
+  
+  Damage = SpellPower + AttackerPower - DefenderDefense
+  Return Damage
+End
+
+
   
   
 
