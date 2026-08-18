@@ -32,8 +32,7 @@ Public Sub Window_Draw()
   Draw.Clear
   Draw.Font.Size = H
 
-  BattleUI.EncounterMsg(FoeID)
-  BattleUI.FoePortraitSingle(FoeID)
+  BattleSequence.Init(FoeID)
 
   If $SelectedUI Then
     BattleUI.SpellSelect()

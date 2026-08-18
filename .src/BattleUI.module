@@ -3,6 +3,7 @@
 Public Sub EncounterMsg(FoeId As Integer)
   
   Dim Msg As String
+
   Msg = "You encountered " & MainDB.GetCharname(FoeId)
   Textbox(Msg)
   

@@ -21,9 +21,9 @@ End Struct
 
 
 Public Hand[4] As Integer
-Public Bat As BattleState
-Public Self As BChara
-Public Foe As BChara
+Public State As BattleState
+Public SelfBattler As BChara
+Public FoeBattler As BChara
 Private $FoeID As Integer
 
 
@@ -40,18 +40,25 @@ Public Function GetFoe() As Integer
 End
 
 
-Public Function InitChara(ident As Integer) As BChara
+Public Sub InitSelf(ident As Integer)
 
-  Dim bchara As BChara
+  SelfBattler = New BChara
+  SelfBattler.DBID = ident
+  SelfBattler.HP = 100
+  SelfBattler.Status = 0
 
-  BChara.DBID = ident
-  bchara.HP = 100
-  bchara.Status = 0
-  bchara.Buffs = [0, 0, 0, 0]
-  bchara.CopiedSpells = [0, 0]
-  bchara.CopyFactor = [0, 0]
 
-  Return bchara
+End
+
+
+Public Sub InitFoe(ident As Integer)
+  
+  FoeBattler = New BChara
+  FoeBattler.DBID = ident
+  FoeBattler.HP = 100
+  FoeBattler.Status = 0
+
+
 
 End
 
@@ -97,17 +104,16 @@ Public Sub Shuffle(Bchara As BChara)
 
 End
 
-  Public Function Debug_InitBattle()
+  Public Function InitBattle()
   
-
-  Self = InitChara(1)
-
-  Foe = InitChara(2)
-  Bat.Turn = 1
-  Bat.LastEnemySpell = 0
-  Bat.UIMode = 1
-  Bat.IsFinish = False
-  Bat.SelfWin = False
+  State = New BattleState
+  InitSelf(1)
+  InitFoe(2)
+  State.Turn = 1
+  State.LastEnemySpell = 0
+  State.UIMode = 1
+  State.IsFinish = False
+  State.SelfWin = False
 End
 
 

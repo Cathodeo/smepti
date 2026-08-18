@@ -1,2 +1,12 @@
 ' Gambas module file
 
+Public BatDebug As Battle
+
+Public Sub Init(FoeID As Integer)
+  BattleUI.EncounterMsg(FoeID)
+  BattleUI.FoePortraitSingle(FoeID)
+  BatDebug = New Battle
+  BatDebug.InitBattle()
+  
+End
+
