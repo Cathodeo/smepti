@@ -2,26 +2,36 @@
 
 Private $hWindow As Window
 Private FoeID As Integer
-Private $SelectedUI As Boolean
-
+Private CurrMenu As Integer
+Private PosArrow As Integer
+Private IsInitDone As Boolean
 
 
 Public Sub Main()
 
-
-  
   $hWindow = New Window As "Window"
   FoeID = 2
+  
+
   With $hWindow
     .Resize(256, 240)
     .Resizable = False
     .Show
     .FrameRate = 60
     $hWindow.FullScreen = Not $hWindow.FullScreen
+
     MainDB.Initialize
-  End With 
-  
+   
+    BattleSequence.Init()
+    BattleUI.InitUIStuff
+
+    IsInitDone = False
+    PosArrow = 1
+    CurrMenu = 1
+  End With
+
 End
+
 
 Public Sub Window_Draw()
 
@@ -32,29 +42,87 @@ Public Sub Window_Draw()
   Draw.Clear
   Draw.Font.Size = H
 
-  BattleSequence.Init(FoeID)
+  If IsInitDone = False Then
 
-  If $SelectedUI Then
-    BattleUI.SpellSelect()
+    BattleSequence.Initial_Msg(FoeID)
+
+  Else
+
+    If CurrMenu = 2 Then
+      BattleSequence.Show_Spells(FoeID)
+
+    Else If CurrMenu = 1 Then
+      BattleSequence.Show_Menu(FoeID, PosArrow)
+
+    Endif
+
   Endif
 
 End
+
 
 Public Sub Window_KeyPress()
 
   Select Case Key.Code
 
-    Case Key.F1
-      $SelectedUI = True
+    Case Key.Return
 
-    Case Key.F2
-      $SelectedUI = False
+      If IsInitDone = False Then
+
+        IsInitDone = True
+
+      Else
+
+        Select Case PosArrow
+
+          Case 1
+            CurrMenu = 2
+
+          Case 2
+            ' Segunda opción del menú principal
+
+        End Select
+
+      Endif
+
+
+    Case Key.Up
+
+      If IsInitDone = True And CurrMenu = 1 Then
+
+        PosArrow -= 1
+
+        If PosArrow < 1 Then
+          PosArrow = 2
+        Endif
+
+      Endif
+
+
+    Case Key.Down
+
+    If IsInitDone = True And CurrMenu = 1 Then
+
+    PosArrow += 1
+
+    If PosArrow > 3 Then
+      PosArrow = 1
+    Endif
+
+  Endif
+
+
+    Case Key.Backspace
+
+      If IsInitDone = True Then
+        CurrMenu = 1
+      Endif
+
 
     Case Key.Esc
+
       $hWindow.Close
 
   End Select
-
-
 
 End

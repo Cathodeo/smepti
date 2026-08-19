@@ -1,0 +1,9 @@
+' Gambas class file
+
+Public Name As String
+Public Power As Integer
+Public Accuracy As Integer
+Public Effect As Integer
+Public Status As Integer
+Public IsAlly As Boolean
+Public IsGlobal As Boolean

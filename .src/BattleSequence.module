@@ -2,11 +2,35 @@
 
 Public BatDebug As Battle
 
-Public Sub Init(FoeID As Integer)
+Public Sub Init()
+
+  BatDebug = New Battle
+  BatDebug.InitBattle(1, 2)
+
+  BatDebug.Shuffle(BatDebug.SelfBattler)
+
+End
+
+Public Sub Initial_Msg(FoeID As Integer)
+  
+  Draw.Clear
   BattleUI.EncounterMsg(FoeID)
   BattleUI.FoePortraitSingle(FoeID)
-  BatDebug = New Battle
-  BatDebug.InitBattle()
+  
+End
+
+Public Sub Show_Menu(FoeID As Integer, Position As Integer)
+  Draw.Clear
+  BattleUI.SelectUI(Position)
+  BattleUI.FoePortraitSingle(FoeID)
+  
+End
+
+Public Sub Show_Spells(FoeID As Integer)
+  
+  Draw.Clear
+  BattleUI.SpellSelect
+  BattleUI.FoePortraitSingle(FoeID)
   
 End
 

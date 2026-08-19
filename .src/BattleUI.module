@@ -1,5 +1,16 @@
 ' Gambas module file
 
+Public BatDebug As Battle
+
+
+
+Public Sub InitUIStuff()
+  BatDebug = New Battle
+  BatDebug = BattleSequence.BatDebug
+  
+End
+
+
 Public Sub EncounterMsg(FoeId As Integer)
   
   Dim Msg As String
@@ -18,27 +29,47 @@ End
 
 
 
-Public Sub SelectUI()
-  
-ClearSect()
-Draw.Rect(8, 160, 120, 64)
-Draw.Text("1 - ATTACK", 24, 168)
-Draw.Text("2 - E-SPELL", 24, 188)
-Draw.Text("3 - DEFEND", 24, 208)
-  
+Public Sub SelectUI(Position As Integer)
+
+  Dim ArrowY As Integer
+
+  ClearSect()
+
+  Draw.Rect(8, 160, 120, 64)
+
+  Draw.Text("ATTACK", 24, 168)
+  Draw.Text("E-SPELL", 24, 188)
+  Draw.Text("DEFEND", 24, 208)
+
+  ArrowY = 168 + ((Position - 1) * 20)
+
+  Draw.Text(">", 12, ArrowY)
+
 End
 
 Public Sub SpellSelect()
 
+  Dim i As Integer
+  Dim X As Integer
+  Dim SpellID As Integer
+  Dim CurrentSpell As Spell
+
   ClearSect()
 
-  Draw.Rect(12, 160, 55, 64)
-  Draw.Rect(71, 160, 55, 64)
-  Draw.Rect(130, 160, 55, 64)
-  Draw.Rect(189, 160, 55, 64)
+  For i = 0 To 3
+
+    X = 12 + (i * 59)
+
+    Draw.Rect(X, 160, 55, 64)
+
+    SpellID = BatDebug.Hand[i]
+    CurrentSpell = MainDB.GetSpell(SpellID)
+
+    Draw.Text(CurrentSpell.Name, X + 4, 168)
+
+  Next
 
 End
-
 
 Public Sub FoePortraitSingle(FoeId As Integer)
   

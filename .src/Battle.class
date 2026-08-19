@@ -40,27 +40,7 @@ Public Function GetFoe() As Integer
 End
 
 
-Public Sub InitSelf(ident As Integer)
 
-  SelfBattler = New BChara
-  SelfBattler.DBID = ident
-  SelfBattler.HP = 100
-  SelfBattler.Status = 0
-
-
-End
-
-
-Public Sub InitFoe(ident As Integer)
-  
-  FoeBattler = New BChara
-  FoeBattler.DBID = ident
-  FoeBattler.HP = 100
-  FoeBattler.Status = 0
-
-
-
-End
 
 Public Sub Shuffle(Bchara As BChara)
 
@@ -104,11 +84,25 @@ Public Sub Shuffle(Bchara As BChara)
 
 End
 
-  Public Function InitBattle()
+  Public Function InitBattle(ident_self As Integer, ident_foe As Integer)
   
   State = New BattleState
-  InitSelf(1)
-  InitFoe(2)
+  'InitSelf(1)
+  'InitFoe(2)
+  
+
+  SelfBattler = New BChara
+  SelfBattler.DBID = ident_self
+  SelfBattler.HP = 100
+  SelfBattler.Status = 0
+
+  
+  FoeBattler = New BChara
+  FoeBattler.DBID = ident_foe
+  FoeBattler.HP = 100
+  FoeBattler.Status = 0
+
+
   State.Turn = 1
   State.LastEnemySpell = 0
   State.UIMode = 1
